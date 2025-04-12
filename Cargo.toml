@@ -7,6 +7,7 @@ homepage = "https://github.com/RedstoneWizard08/NeoInstall"
 repository = "https://github.com/RedstoneWizard08/NeoInstall"
 readme = "./README.md"
 license = "MIT"
+description = "A blazingly fast Rust-based alternative installer for NeoForge."
 
 [dependencies]
 anyhow = "1.0.97"
