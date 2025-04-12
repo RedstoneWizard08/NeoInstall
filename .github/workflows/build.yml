@@ -9,8 +9,8 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - target: x86_64-unknown-linux-gnu
-            windows: false
+        #   - target: x86_64-unknown-linux-gnu
+        #     windows: false
           - target: aarch64-unknown-linux-gnu
             windows: false
         #   - target: arm-unknown-linux-gnueabi
@@ -25,8 +25,8 @@ jobs:
         #     windows: false
           - target: arm-unknown-linux-musleabihf
             windows: false
-          - target: x86_64-apple-darwin
-            windows: false
+        #   - target: x86_64-apple-darwin
+        #     windows: false
           - target: aarch64-apple-darwin
             windows: false
           - target: x86_64-pc-windows-gnu
