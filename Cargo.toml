@@ -1,6 +1,6 @@
 [package]
 name = "neo-install"
-version = "0.1.1"
+version = "0.1.2"
 edition = "2024"
 authors = ["RedstoneWizard08"]
 homepage = "https://github.com/RedstoneWizard08/NeoInstall"
@@ -23,5 +23,5 @@ tokio = { version = "1.44.2", features = ["rt", "macros", "rt-multi-thread"] }
 zip = "2.6.1"
 
 [package.metadata.binstall]
-pkg-url = "{ repo }/releases/download/v{ version }/{ bin }-{ target }"
+pkg-url = "{ repo }/releases/download/v{ version }/neo-install-{ target }"
 pkg-fmt = "bin"
