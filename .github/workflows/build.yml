@@ -21,8 +21,8 @@ jobs:
             windows: false
           - target: aarch64-unknown-linux-musl
             windows: false
-          - target: arm-unknown-linux-musleabi
-            windows: false
+        #   - target: arm-unknown-linux-musleabi
+        #     windows: false
           - target: arm-unknown-linux-musleabihf
             windows: false
           - target: x86_64-apple-darwin
