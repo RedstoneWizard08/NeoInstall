@@ -1,5 +1,5 @@
 [package]
-name = "res"
+name = "neo-install"
 version = "0.1.0"
 edition = "2024"
 
@@ -8,9 +8,10 @@ anyhow = "1.0.97"
 clap = { version = "4.5.36", features = ["derive"] }
 indicatif = { version = "0.17.11", features = ["rayon"] }
 itertools = "0.14.0"
+libsui = "0.7.0"
 rayon = "1.10.0"
 reqwest = { version = "0.12.15", default-features = false, features = ["blocking", "json", "rustls-tls"] }
 serde = { version = "1.0.219", features = ["derive"] }
 serde_json = "1.0.140"
-tokio = { version = "1.44.2", features = ["full"] }
+tokio = { version = "1.44.2", features = ["rt", "macros", "rt-multi-thread"] }
 zip = "2.6.1"
