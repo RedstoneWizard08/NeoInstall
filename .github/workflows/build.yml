@@ -13,8 +13,8 @@ jobs:
             windows: false
           - target: aarch64-unknown-linux-gnu
             windows: false
-          - target: arm-unknown-linux-gnueabi
-            windows: false
+        #   - target: arm-unknown-linux-gnueabi
+        #     windows: false
           - target: arm-unknown-linux-gnueabihf
             windows: false
           - target: x86_64-unknown-linux-musl
