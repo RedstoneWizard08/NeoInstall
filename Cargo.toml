@@ -1,6 +1,6 @@
 [package]
 name = "neo-install"
-version = "0.1.0"
+version = "0.1.1"
 edition = "2024"
 authors = ["RedstoneWizard08"]
 homepage = "https://github.com/RedstoneWizard08/NeoInstall"
