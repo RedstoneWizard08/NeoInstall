@@ -4,7 +4,7 @@ use crate::{
     manifest::download_mc_jars,
     maven::maven_to_path,
     processors::run_processor,
-    profile::{NeoProfile, setup_vars},
+    profile::{NeoProfile, NeoVersionManifest, setup_vars},
     side::Side,
     util::make_path_and_create,
 };
@@ -53,6 +53,7 @@ pub struct AutoCli {
 #[derive(Subcommand)]
 pub enum Commands {
     /// Generate an automated installer for a specific version.
+    #[clap(alias = "g")]
     Generate {
         /// The version of NeoForge to install.
         #[clap(short = 'n', long = "neo")]
@@ -64,6 +65,7 @@ pub enum Commands {
     },
 
     /// Install NeoForge.
+    #[clap(alias = "i")]
     Install {
         /// The side to install for.
         #[clap(short = 's', long = "side", value_enum)]
@@ -93,7 +95,7 @@ impl AutoCli {
     }
 
     pub async fn run(self) -> Result<()> {
-        let Some(neo) = libsui::find_section(EMBEDDED_VERSION_SECTION) else {
+        let Ok(Some(neo)) = libsui::find_section(EMBEDDED_VERSION_SECTION) else {
             return Err(anyhow!("Could not find embedded NeoForge version data!"));
         };
 
@@ -156,7 +158,7 @@ impl Cli {
                 keep,
                 java,
             } => {
-                let work_dir = make_path_and_create(target)?.canonicalize()?;
+                let work_dir = std::path::absolute(make_path_and_create(target)?)?;
                 let base_path = work_dir.join(".installer");
                 let lib_path = work_dir.join("libraries");
                 let data_path = base_path.join("data");
@@ -175,6 +177,13 @@ impl Cli {
                 profile_entry.read_to_string(&mut profile_json)?;
 
                 drop(profile_entry);
+
+                let mut version_entry = jar_zip.by_name("version.json")?;
+                let mut version_json = String::new();
+
+                version_entry.read_to_string(&mut version_json)?;
+
+                drop(version_entry);
 
                 let mut data_files = Vec::new();
 
@@ -198,8 +207,10 @@ impl Cli {
                 }
 
                 let mut profile = serde_json::from_str::<NeoProfile>(&profile_json)?;
+                let version_json = serde_json::from_str::<NeoVersionManifest>(&version_json)?;
 
                 profile.add_minecraft();
+                profile.libraries.extend(version_json.libraries);
 
                 let vars = setup_vars(&profile, side, &lib_path, &base_path, &jar_path);
 
@@ -232,7 +243,9 @@ impl Cli {
 }
 
 pub fn is_auto() -> bool {
-    find_section(EMBEDDED_VERSION_SECTION).is_some()
+    find_section(EMBEDDED_VERSION_SECTION)
+        .map(|it| it.is_some())
+        .unwrap_or(false)
 }
 
 pub async fn run() -> Result<()> {

@@ -106,7 +106,10 @@ pub async fn run_processor(
         .map(|v| v.to_string())
         .ok_or(anyhow!("Failed to find main class in JAR: {}", proc.jar))?;
 
+    #[cfg(not(windows))]
     let classpath = classpath.join(":");
+    #[cfg(windows)]
+    let classpath = classpath.join(";");
     let mut cmd = Vec::new();
 
     cmd.push(java.into());

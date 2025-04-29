@@ -25,6 +25,27 @@ pub struct NeoProfile {
     pub server_jar_path: String,
 }
 
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
+pub struct NeoVersionManifest {
+    pub id: String,
+    pub time: String,
+    pub release_time: String,
+    #[serde(rename = "type")]
+    pub kind: String,
+    pub main_class: String,
+    pub inherits_from: String,
+    pub arguments: GameArguments,
+    pub libraries: Vec<Library>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
+pub struct GameArguments {
+    pub game: Vec<String>,
+    pub jvm: Vec<String>,
+}
+
 impl NeoProfile {
     pub fn data(
         &self,

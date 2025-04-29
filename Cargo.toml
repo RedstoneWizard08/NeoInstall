@@ -1,6 +1,6 @@
 [package]
 name = "neo-install"
-version = "0.1.2"
+version = "0.1.3"
 edition = "2024"
 authors = ["RedstoneWizard08"]
 homepage = "https://github.com/RedstoneWizard08/NeoInstall"
@@ -10,11 +10,11 @@ license = "MIT"
 description = "A blazingly fast Rust-based alternative installer for NeoForge."
 
 [dependencies]
-anyhow = "1.0.97"
-clap = { version = "4.5.36", features = ["derive"] }
+anyhow = "1.0.98"
+clap = { version = "4.5.37", features = ["derive"] }
 indicatif = { version = "0.17.11", features = ["rayon"] }
 itertools = "0.14.0"
-libsui = "0.7.0"
+libsui = "0.10.0"
 rayon = "1.10.0"
 reqwest = { version = "0.12.15", default-features = false, features = ["blocking", "json", "rustls-tls"] }
 serde = { version = "1.0.219", features = ["derive"] }
